@@ -53,10 +53,18 @@ static LRESULT CALLBACK WindowProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lP
 
 static void DrawScene()
 {
-	glViewport(0, 0, globals.window_width, globals.window_height);
+	glViewport(100, 100, globals.window_width/2, globals.window_height/2);
 
-	glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
+	glColor3f(0.0f, 1.0f, 0.0f);
+	glBegin(GL_LINE_LOOP);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.7f, 0.0f, 0.0f);
+	glVertex3f(0.35f, 0.7f, 0.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glEnd();
+
 }
 
 int CALLBACK WinMain(
