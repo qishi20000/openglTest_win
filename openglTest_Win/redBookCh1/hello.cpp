@@ -51,18 +51,25 @@ static LRESULT CALLBACK WindowProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lP
 	return DefWindowProc(hWnd, msg, wParam, lParam);
 }
 
+static void Init()
+{
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	//glOrtho(0.25, 1.0, 0.25, 1.0, -1.0, 1.0);
+}
+
 static void DrawScene()
 {
 	glViewport(0, 0, globals.window_width, globals.window_height);
 
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
-	glColor3f(0.0f, 1.0f, 0.0f);
-	glBegin(GL_LINE_LOOP);
-	glVertex3f(0.0f, 0.0f, 0.0f);
-	glVertex3f(0.7f, 0.0f, 0.0f);
-	glVertex3f(0.35f, 0.7f, 0.0f);
-	glVertex3f(0.0f, 0.0f, 0.0f);
+	glColor3f(1.0f, 1.0f, 1.0f);
+	glBegin(GL_POLYGON);
+	glVertex3f(0.25f, 0.25f, 0.0f);
+	glVertex3f(0.75f, 0.25f, 0.0f);
+	glVertex3f(0.75f, 0.75f, 0.0f);
+	glVertex3f(0.25f, 0.75f, 0.0f);
 	glEnd();
 
 }
@@ -116,7 +123,7 @@ int CALLBACK WinMain(
 	int iPixelFormat = ::ChoosePixelFormat(dc, &pfd);
 	::SetPixelFormat(dc, iPixelFormat, &pfd);
 
- 	HGLRC rc = wglCreateContext(dc);
+	HGLRC rc = wglCreateContext(dc);
 	wglMakeCurrent(dc, rc);
 
 	for (;;)
@@ -130,6 +137,7 @@ int CALLBACK WinMain(
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
+		Init();
 		DrawScene();
 		::SwapBuffers(dc);
 	}
