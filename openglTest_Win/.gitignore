@@ -1,0 +1,7 @@
+.vs
+*.exe
+*.pdb
+*.ilk
+
+redBookCh8/x64
+redBookCh9/x64
